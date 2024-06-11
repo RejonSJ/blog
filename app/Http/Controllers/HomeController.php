@@ -25,8 +25,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $posts = DB::table('posts')
-            ->select('text')
+        $posts = DB::table('posts as p')
+            ->select('p.*','u.name')
+            ->join('users as u','u.id','p.idUser')
+            ->orderBy('created_at','desc')
             ->get();
         return view('home')->with(compact('posts'));
     }

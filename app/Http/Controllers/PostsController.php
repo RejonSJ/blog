@@ -33,11 +33,13 @@ use App\Http\Controllers\Controller;
                 return back()->withErrors($validation->errors());
             }
 
-            $nombre = $request ->get('nombre');
+            $title = $request->get('title');
+            $text = $request->get('text');
+            $idUser = $request->get('idUser');
 
-            Autores::create(['nombre' => $nombre]);
+            Posts::create(['title' => $title]+['text' => $text]+['idUser' => $idUser]);
 
-            return redirect()->back()->with('success','El autor se ha creado con exito');
+            return redirect()->back()->with('success','Su publicación fue realizada correctamente.');
         }
         public function updatePost(Request $request){
             $id = $request->get('id');
