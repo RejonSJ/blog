@@ -1,18 +1,18 @@
-<form method="post" id="updatePost" action="{{route('posts.updatePost')}}">
+<form method="post" id="updateReply" action="{{route('replies.updateReply')}}">
     @method('PUT')
     @csrf
-    <div class="modal fade" id="editarPost">
+    <div class="modal fade" id="editarReply">
         <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <input type="text" class="form-control" id="titleEdit" name="title">
+                    <h5 class="mb-0">Editar comentario</h5>
                 </div>
                 <div class="modal-body">
-                    <input type="hidden" class="form-control" id="idEdit" name="id">
+                    <input type="hidden" class="form-control" id="idReplyEdit" name="id">
                     <div class="row">
                         <div class="col-12">
                             <div class="form-group">
-                                <textarea type="text" class="form-control" id="textEdit" name="text"></textarea>
+                                <textarea type="text" class="form-control" id="textReplyEdit" name="text"></textarea>
                             </div>
                         </div>
                     </div>

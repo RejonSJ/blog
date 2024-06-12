@@ -42,18 +42,51 @@ use App\Http\Controllers\Controller;
             return redirect()->back()->with('success','Su publicación fue realizada correctamente.');
         }
         public function updatePost(Request $request){
+            $validation = Validator::make($request->all(), 
+                [
+                    'text' => 'required|max:280',
+                    'title' => 'required|max:50'
+                ],
+                [
+                    'text.required' => 'El :attribute es necesario.',
+                    'text.max' => 'El :attribute no puede superar los 280 caracteres.',
+                    'title.required' => 'El :attribute es necesario.',
+                    'title.max' => 'El :attribute no puede superar los 50 caracteres.',
+                ]
+            );
+        
+
+            if($validation->fails()){
+                return back()->withErrors($validation->errors());
+            }
+
             $id = $request->get('id');
-            $nombre = $request ->get('nombre');
+            $title = $request->get('title');
+            $text = $request->get('text');
 
-            Autores::find($id)->update(['nombre' => $nombre]);
+            Posts::find($id)->update(['title' => $title]+['text' => $text]);
 
-            return redirect()->back()->with('success','El autor se ha actualizado con exito');
+            return redirect()->back()->with('success','Su publicación fue editada correctamente.');
         }
         public function deletePost($id){
 
-            Autores::find($id)->delete();
+            Posts::find($id)->delete();
     
-            return redirect()->back()->with('success','El autor se ha eliminado con exito');
+            return redirect()->back()->with('success','Su publicación fue eliminada correctamente.');
+        }
+        public function detailPost($id){
+            $post = DB::table('posts as p')
+                ->select('p.*','u.name')
+                ->join('users as u','u.id','p.idUser')
+                ->orderBy('created_at','desc')
+                ->where('p.id','=',$id)
+                ->first();
+            $replies = DB::table('replies as r')
+            ->select('r.*','u.name')
+            ->join('users as u','u.id','r.idUser')
+            ->orderBy('created_at','desc')
+            ->get();
+            return view('post')->with(compact('post','replies'));
         }
     }
 

@@ -31,26 +31,38 @@
   }
 
 .card-footer{
-    background-color: transparent;
-    display: flex;
-    justify-content: end;
+  background-color: transparent;
+  display: flex;
+  justify-content: end;
+}
+.footer-btn{
+  justify-content: center;
+  align-items: center;
 }
 
 .newPostInput{
-    width: 100%;
-    background-color: rgba(0,0,0,.05);
-    border-radius: 3px;
-    padding: 5px;
-    border: none;
-    overflow: auto;
-    outline: none;
+  width: 100%;
+  background-color: rgba(0,0,0,.05);
+  border-radius: 3px;
+  padding: 5px;
+  border: none;
+  overflow: auto;
+  outline: none;
 
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
-    box-shadow: none;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
 
-    resize: none; /*remove the resize handle on the bottom right*/
+  resize: none; /*remove the resize handle on the bottom right*/
 }
 .inputTall{
-    height: 8em;
+  height: 8em;
+}
+.reply{
+  height: 38px;
+}
+
+.list-group-flush>.list-group-item{
+  border: 1px solid rgba(0, 0, 0, .125);
+  border-width: 1px 0 0 0;
 }

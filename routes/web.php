@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostsController;
+use App\Http\Controllers\RepliesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,3 +28,8 @@ Auth::routes();
 Route::post('posts/createPost', [PostsController::class, 'createPost'])->name('posts.createPost');
 Route::put('posts/updatePost', [PostsController::class, 'updatePost'])->name('posts.updatePost');
 Route::delete('posts/deletePost/{id}', [PostsController::class, 'deletePost'])->name('posts.deletePost');
+Route::get('posts/detailPost/{id}', [PostsController::class, 'detailPost'])->name('posts.detailPost');
+
+Route::post('replies/createReply', [RepliesController::class, 'createReply'])->name('replies.createReply');
+Route::put('replies/updateReply', [RepliesController::class, 'updateReply'])->name('replies.updateReply');
+Route::delete('replies/deleteReply/{id}', [RepliesController::class, 'deleteReply'])->name('replies.deleteReply');
