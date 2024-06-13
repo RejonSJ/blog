@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * Class AutorestestController
@@ -40,14 +41,32 @@ use App\Http\Controllers\Controller;
 
             return redirect()->back()->with('success','Su publicación fue editada correctamente.');
         }
-        public function getProfile($id){
+        public function myProfile(){
+            $id = Auth::user()->id;
+            $user = DB::table('users as u')
+                ->select('*')
+                ->where('u.id','=',$id)
+                ->first();
             $posts = DB::table('posts as p')
                 ->select('p.*','u.name')
                 ->join('users as u','u.id','p.idUser')
                 ->orderBy('created_at','desc')
                 ->where('p.idUser','=',$id)
                 ->get();
-            return view('profile')->with(compact('posts'));
+            return view('profile')->with(compact('posts','user'));
+        }
+        public function getProfile($id){
+            $user = DB::table('users as u')
+                ->select('*')
+                ->where('u.id','=',$id)
+                ->first();
+            $posts = DB::table('posts as p')
+                ->select('p.*','u.name')
+                ->join('users as u','u.id','p.idUser')
+                ->orderBy('created_at','desc')
+                ->where('p.idUser','=',$id)
+                ->get();
+            return view('profile')->with(compact('posts','user'));
         }
     }
 

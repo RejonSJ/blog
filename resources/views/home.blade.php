@@ -11,8 +11,8 @@
 @endsection
 
 @section('content')
-    <div class="row">
-        <div class="col-12">
+    <div class="row justify-content-center">
+        <div class="col-12 col-sm-8 col-lg-6">
             <form method="post" id="storePost" action="{{route('posts.createPost')}}">
                 @method('POST')
                 @csrf
@@ -24,6 +24,10 @@
                             </div>
                             <div class="col-12">
                                 <textarea class="newPostInput inputTall" placeholder="Contenido" id="textNewPost" name="text"></textarea>
+                            </div>
+                            <div class="col-12">
+                                <input type="file" class="" placeholder="Contenido" id="imageNewPost" name="image">
+                                <input type="hidden" id="b64NewPost" name="imageB64">
                             </div>
                         </div>
                         <input type="hidden" name="idUser" value="{{Auth::user()->id}}">
@@ -44,7 +48,8 @@
                                 <a class="" href="{{route('profile.getProfile',$post->idUser)}}">
                                     <b>{{$post->name}}</b>
                                 </a>
-                                 - {{date_format(date_create($post->created_at),"d/m/Y H:i")}}</p>                            
+                                 - {{date_format(date_create($post->created_at),"d/m/Y H:i")}}
+                            </p>
                         </div>
                         <div class="col-auto">
                             @if ($post->idUser == Auth::user()->id)
@@ -63,8 +68,13 @@
                 <div class="card-body">
                     <p class="mb-0"><b>{{$post->title}}</b></p>
                     <p class="mb-0">{{$post->text}}</p>
+                    @if ($post->image!=null)
+                        <div class="image-container">
+                            <img src="{{$post->image}}">
+                        </div>
+                    @endif
                 </div>
-                <a class="card-footer bg-primary footer-btn" href="{{route('posts.detailPost',$post->id)}}">
+                <a class="card-footer bg-secondary footer-btn" href="{{route('posts.detailPost',$post->id)}}">
                     <i class="fas fa-comment"></i> Comentarios
                 </a>
             </div>
@@ -99,6 +109,21 @@
         document.getElementById('textEdit').value = post.text;
         $('#editarPost').modal({backdrop: 'static', keyboard: false}, 'show');
     }
+    function readFile() {
+    
+    if (!this.files || !this.files[0]) return;
+        
+    const FR = new FileReader();
+        
+    FR.addEventListener("load", function(evt) {
+        document.querySelector("#b64NewPost").value = evt.target.result;
+    }); 
+        
+    FR.readAsDataURL(this.files[0]);
+    
+    }
+
+    document.querySelector("#imageNewPost").addEventListener("change", readFile);
 </script>
 @if(Session::has('success'))
 <script>

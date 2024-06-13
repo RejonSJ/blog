@@ -1,22 +1,24 @@
-<form method="post" id="updatePost" action="{{route('posts.updatePost')}}">
+<form method="post" id="updatePassword" action="{{route('user.updatePassword')}}">
     @method('PUT')
     @csrf
-    <div class="modal fade" id="editarPost">
+    <div class="modal fade" id="editarPassword">
         <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <input type="text" class="form-control" id="titleEdit" name="title">
+                    <h5 class="mb-0">Actualizar contraseña</h5>
                 </div>
                 <div class="modal-body">
-                    <input type="hidden" class="form-control" id="idEdit" name="id">
+                    <input type="hidden" class="form-control" id="idUserPasswordEdit" name="id">
                     <div class="row">
                         <div class="col-12">
                             <div class="form-group">
-                                <textarea type="text" class="form-control" id="textEdit" name="text"></textarea>
+                                <label for="oldPassword">Contraseña actual</label>
+                                <input type="text" class="form-control" id="oldPasswordUserEdit" name="oldPassword">
                             </div>
-                        </div>
-                        <div class="col-12">
-                            <p class="mb-0 text-secondary"><i class="fas fa-info-circle"></i> La imagen no puede ser editada.</p>
+                            <div class="form-group">
+                                <label for="password">Contraseña nueva</label>
+                                <input type="text" class="form-control" id="passwordUserEdit" name="password">
+                            </div>
                         </div>
                     </div>
                 </div>

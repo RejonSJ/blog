@@ -36,8 +36,9 @@ use App\Http\Controllers\Controller;
             $title = $request->get('title');
             $text = $request->get('text');
             $idUser = $request->get('idUser');
+            $image = $request->get('imageB64');
 
-            Posts::create(['title' => $title]+['text' => $text]+['idUser' => $idUser]);
+            Posts::create(['title' => $title]+['text' => $text]+['idUser' => $idUser]+['image' => $image]);
 
             return redirect()->back()->with('success','Su publicación fue realizada correctamente.');
         }
@@ -88,6 +89,7 @@ use App\Http\Controllers\Controller;
             ->select('r.*','u.name')
             ->join('users as u','u.id','r.idUser')
             ->orderBy('created_at','desc')
+            ->where('r.idPost','=',$post->id)
             ->get();
             return view('post')->with(compact('post','replies'));
         }

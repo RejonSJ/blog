@@ -11,13 +11,18 @@
 @endsection
 
 @section('content')
-    <div class="row">
-        <div class="col-12">
+    <div class="row justify-content-center">
+        <div class="col-12 col-sm-8 col-lg-6">
             <div class="card">
                 <div class="card-header">
                     <div class="row">
                         <div class="col">
-                            <p class="mb-0"><b>{{$post->name}}</b> - {{date_format(date_create($post->created_at),"d/m/Y H:i")}}</p>
+                            <p class="mb-0">
+                                <a class="" href="{{route('profile.getProfile',$post->idUser)}}">
+                                    <b>{{$post->name}}</b>
+                                </a>
+                                 - {{date_format(date_create($post->created_at),"d/m/Y H:i")}}
+                            </p>
                         </div>
                         <div class="col-auto">
                             @if ($post->idUser == Auth::user()->id)
@@ -36,6 +41,11 @@
                 <div class="card-body">
                     <p class="mb-0"><b>{{$post->title}}</b></p>
                     <p class="mb-0">{{$post->text}}</p>
+                    @if ($post->image!=null)
+                        <div class="image-container">
+                            <img src="{{$post->image}}">
+                        </div>
+                    @endif
                 </div>
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item">
@@ -58,7 +68,12 @@
                         <li class="list-group-item">
                             <div class="row">
                                 <div class="col">
-                                    <p class="mb-0"><b>{{$reply->name}}</b> - {{date_format(date_create($reply->created_at),"d/m/Y H:i")}}</p>
+                                    <p class="mb-0">
+                                        <a class="" href="{{route('profile.getProfile',$reply->idUser)}}">
+                                            <b>{{$reply->name}}</b>
+                                        </a>
+                                         - {{date_format(date_create($reply->created_at),"d/m/Y H:i")}}
+                                    </p>
                                 </div>
                                 <div class="col-auto">
                                     @if ($reply->idUser == Auth::user()->id)

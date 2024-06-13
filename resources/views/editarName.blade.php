@@ -1,22 +1,19 @@
-<form method="post" id="updatePost" action="{{route('posts.updatePost')}}">
+<form method="post" id="updateName" action="{{route('user.updateName')}}">
     @method('PUT')
     @csrf
-    <div class="modal fade" id="editarPost">
+    <div class="modal fade" id="editarName">
         <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <input type="text" class="form-control" id="titleEdit" name="title">
+                    <h5 class="mb-0">Actualizar nombre</h5>
                 </div>
                 <div class="modal-body">
-                    <input type="hidden" class="form-control" id="idEdit" name="id">
+                    <input type="hidden" class="form-control" id="idUserEdit" name="id">
                     <div class="row">
                         <div class="col-12">
                             <div class="form-group">
-                                <textarea type="text" class="form-control" id="textEdit" name="text"></textarea>
+                                <input type="text" class="form-control" id="nameUserEdit" name="name">
                             </div>
-                        </div>
-                        <div class="col-12">
-                            <p class="mb-0 text-secondary"><i class="fas fa-info-circle"></i> La imagen no puede ser editada.</p>
                         </div>
                     </div>
                 </div>

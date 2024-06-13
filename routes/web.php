@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\RepliesController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,4 +36,8 @@ Route::post('replies/createReply', [RepliesController::class, 'createReply'])->n
 Route::put('replies/updateReply', [RepliesController::class, 'updateReply'])->name('replies.updateReply');
 Route::delete('replies/deleteReply/{id}', [RepliesController::class, 'deleteReply'])->name('replies.deleteReply');
 
+Route::get('profile', [ProfileController::class, 'myProfile'])->name('profile');
 Route::get('profile/{id}', [ProfileController::class, 'getProfile'])->name('profile.getProfile');
+
+Route::put('user/updateName', [UserController::class, 'updateName'])->name('user.updateName');
+Route::put('user/updatePassword', [UserController::class, 'updatePassword'])->name('user.updatePassword');

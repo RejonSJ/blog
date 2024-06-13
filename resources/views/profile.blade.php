@@ -11,8 +11,28 @@
 @endsection
 
 @section('content')
-    <div class="row">
-        <div class="col-12">
+    <div class="row justify-content-center">
+        <div class="col-12 col-sm-8 col-lg-6">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <h5 class="mb-0"><b>{{$user->name}}</b></h5>
+                        </div>
+                        <div class="col-auto">
+                            @if ($user->id == Auth::user()->id)
+                            <button class="btn btn-sm btn-primary" title="Cambiar nombre" onclick="editarName({{json_encode($user)}})">
+                                <i class="fas fa-pen fa-fw"></i>
+                            </button>
+                            <button class="btn btn-sm btn-secondary" title="Cambiar contraseña" onclick="editarPassword({{json_encode($user)}})">
+                                <i class="fas fa-lock fa-fw"></i>
+                            </button>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @if ($user->id == Auth::user()->id)
             <form method="post" id="storePost" action="{{route('posts.createPost')}}">
                 @method('POST')
                 @csrf
@@ -35,6 +55,7 @@
                     </div>
                 </div>
             </form>
+            @endif
             @foreach ($posts as $post)
             <div class="card">
                 <div class="card-header">
@@ -59,8 +80,13 @@
                 <div class="card-body">
                     <p class="mb-0"><b>{{$post->title}}</b></p>
                     <p class="mb-0">{{$post->text}}</p>
+                    @if ($post->image!=null)
+                        <div class="image-container">
+                            <img src="{{$post->image}}">
+                        </div>
+                    @endif
                 </div>
-                <a class="card-footer bg-primary footer-btn" href="{{route('posts.detailPost',$post->id)}}">
+                <a class="card-footer bg-secondary footer-btn" href="{{route('posts.detailPost',$post->id)}}">
                     <i class="fas fa-comment"></i> Comentarios
                 </a>
             </div>
@@ -69,6 +95,8 @@
     </div>
 
     @include('editarPost')
+    @include('editarName')
+    @include('editarPassword')
 @stop
 
 @section('js')
@@ -94,6 +122,15 @@
         document.getElementById('titleEdit').value = post.title;
         document.getElementById('textEdit').value = post.text;
         $('#editarPost').modal({backdrop: 'static', keyboard: false}, 'show');
+    }
+    function editarName(user){
+        document.getElementById('idUserEdit').value = user.id;
+        document.getElementById('nameUserEdit').value = user.name;
+        $('#editarName').modal({backdrop: 'static', keyboard: false}, 'show');
+    }
+    function editarPassword(user){
+        document.getElementById('idUserPasswordEdit').value = user.id;
+        $('#editarPassword').modal({backdrop: 'static', keyboard: false}, 'show');
     }
 </script>
 @if(Session::has('success'))
