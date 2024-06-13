@@ -81,6 +81,9 @@ use App\Http\Controllers\Controller;
                 ->orderBy('created_at','desc')
                 ->where('p.id','=',$id)
                 ->first();
+            if($post==null){
+                return redirect('/home')->with('success','Su publicación fue eliminada correctamente.');
+            }
             $replies = DB::table('replies as r')
             ->select('r.*','u.name')
             ->join('users as u','u.id','r.idUser')

@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\RepliesController;
+use App\Http\Controllers\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,3 +34,5 @@ Route::get('posts/detailPost/{id}', [PostsController::class, 'detailPost'])->nam
 Route::post('replies/createReply', [RepliesController::class, 'createReply'])->name('replies.createReply');
 Route::put('replies/updateReply', [RepliesController::class, 'updateReply'])->name('replies.updateReply');
 Route::delete('replies/deleteReply/{id}', [RepliesController::class, 'deleteReply'])->name('replies.deleteReply');
+
+Route::get('profile/{id}', [ProfileController::class, 'getProfile'])->name('profile.getProfile');

@@ -40,11 +40,7 @@
                 <div class="card-header">
                     <div class="row">
                         <div class="col">
-                            <p class="mb-0">
-                                <a class="" href="{{route('profile.getProfile',$post->idUser)}}">
-                                    <b>{{$post->name}}</b>
-                                </a>
-                                 - {{date_format(date_create($post->created_at),"d/m/Y H:i")}}</p>                            
+                            <p class="mb-0"><b>{{$post->name}}</b> - {{date_format(date_create($post->created_at),"d/m/Y H:i")}}</p>                            
                         </div>
                         <div class="col-auto">
                             @if ($post->idUser == Auth::user()->id)
